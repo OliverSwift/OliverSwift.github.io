@@ -16,7 +16,7 @@ html {
 @media (min-width: 768px) {
     html {
         font-size: 125%;
-        max-width: 42em;
+        max-width: 60em;
  } }
 
 h1, h2, h3, h4 {
@@ -188,4 +188,12 @@ header a + a {
     vertical-align: middle;
     padding-right: 2rem;
     color: grey;
+}
+pre {
+	font-family: monospace;
+	margin-left: 20px;
+	background-color: black;
+	color: white;
+	font-size: 90%;
+	padding: 10pt;
 }

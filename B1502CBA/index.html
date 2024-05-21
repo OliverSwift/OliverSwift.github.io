@@ -8,11 +8,11 @@
 <p>Don't care about the explanations? Get to the <a href="#how">fix</a>.</p>
 <p>I happened to use a nice Laptop from ASUS : the <a href="https://www.asus.com/fr/laptops/for-work/expertbook/expertbook-b1-b1502-12th-gen-intel/">ExpertBook B1</a>. It comes with Windows 11 (as usual) pre-installed. My laptops are usually borrowed from companies I work for and are usually (not too) tightly managed by the IT department.</p>
 <p>As a Linux user, I like to be able to boot Ubuntu installed on a comfortable external SSD (<a href="https://www.samsung.com/fr/memory-storage/portable-ssd/ssd-externe-t7-usb-3-2-1tb-gray-mu-pc1t0t-ww/">Samsung T7 with 1TB</a>)</p>
-<p>I could access to UEFI wich is not passworded (hmm). So I plugged in my SSD and restarted the PC and entered the BIOS setup. I selected the perfectly detected SSD with ubuntu EFI entry. But, no luck, it returned to BIOS immediately.</p>
-<p>Booting without Secure Boot activated was possible. But this a situation that led to a no go for Windows 11 (luckily I could backup my Bitlocker key). And I prefer to boot Linux with Secure Boot activated.</p>
+<p>I could access to UEFI which is not passworded (hmm). So I plugged in my SSD and restarted the PC and entered the BIOS setup. I selected the perfectly detected SSD with ubuntu EFI entry. But, no luck, it returned to BIOS immediately.</p>
+<p>Booting without Secure Boot activated was possible. But this is not a suitable situation. It makes Windows 11 not booted without Secure Boot and screws up everything especially Bitlocker (luckily I could backup my Bitlocker key). And I prefer to boot both Linux and Windows with Secure Boot activated.</p>
 <p>Without any error messages, I decided to check out installed keys in the UEFI. Ubuntu ESP contains the shimx64.efi first stage bootloader which is signed by Microsoft key. Which allows to properly start the first stage which will then take care of signed subsequent binaries (grub and its modules) and eventually the kernel.</p>
 <p>Surprisingly, ASUS installs Canonical key along with Microsoft PCA key. But the Microsoft CA key was not there. This key is the one used to sign shim. I have no idea why Windows can boot, but shim couldn't.</p>
-<p>Since my moveable Linux SSD is used on other PCs, I didn't want to make specific changes to BIOS or my ESP.</p>
+<p>Since my removeable Linux SSD is used on other PCs, I didn't want to make specific changes to BIOS or my ESP.</p>
 <p>I had to. But in a very convenient way. Ubuntu provides a dual signed shim version, signed by Canonical (key is on the laptop) and signed by Microsoft CA (the missing one).</p>
 <p>I just had to use shimx64.efi.dualsigned to overwrite BOOTX64.efi in /EFI/BOOT directory and overwrite the existing shimx64.efi in /EFI/ubuntu</p>
 <p>This can be done for live USB drive as well.</p>
