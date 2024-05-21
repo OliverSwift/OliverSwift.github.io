@@ -191,4 +191,5 @@ pre {
 	color: white;
 	font-size: 90%;
 	padding: 10pt;
+	overflow: scroll;
 }
